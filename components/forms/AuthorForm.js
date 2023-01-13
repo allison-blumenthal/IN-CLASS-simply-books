@@ -36,7 +36,7 @@ const handleSubmit = (e) => {
   } else {
     const payload = { ...formInput, uid: user.uid };
     createAuthor(payload).then(({ name }) => {
-      const patchPayload = { firebaseKey: name };
+      const patchPayload = { [name]: value };
 
       updateAuthor(patchPayload).then(() => {
         router.push('/authors');
@@ -63,7 +63,7 @@ const handleSubmit = (e) => {
 
         {/* LAST NAME */}
         <FloatingLabel controlId="floatingInput2" label="Author Last Name" className="mb-3"> 
-        <Form.control
+        <Form.Control
           type="text"
           placeholder="Author's last name"
           name="last-name"
@@ -75,7 +75,7 @@ const handleSubmit = (e) => {
 
          {/* IMAGE */}
          <FloatingLabel controlId="floatingInput3" label="Author Image" className="mb-3"> 
-        <Form.control
+        <Form.Control
           type="text"
           placeholder="Author Image URL"
           name="image"
@@ -87,7 +87,7 @@ const handleSubmit = (e) => {
 
          {/* EMAIL */}
          <FloatingLabel controlId="floatingInput4" label="Author Email" className="mb-3"> 
-        <Form.control
+        <Form.Control
           type="text"
           placeholder="Author's email"
           name="last-name"
