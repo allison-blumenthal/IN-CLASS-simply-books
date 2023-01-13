@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createAuthor, getAuthors, updateAuthor } from '../../api/authorData';
+import { createAuthor, updateAuthor } from '../../api/authorData';
 
 const initialState = {
   email: '',
@@ -115,7 +115,6 @@ const handleSubmit = (e) => {
 
        {/* SUBMIT BUTTON  */}
        <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Author</Button>
-
     </Form>
   );
 }
