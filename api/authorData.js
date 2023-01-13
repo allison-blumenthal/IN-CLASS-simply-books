@@ -1,4 +1,5 @@
 import { clientCredentials } from '../utils/client';
+import { useRouter } from 'next/router';
 
 const dbUrl = clientCredentials.databaseURL;
 
@@ -10,18 +11,19 @@ const getAuthors = (uid) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
       } else {
         resolve([]);
       }
     })
-    .catch((error) => reject(error));
+    .catch(reject);
 });
 
 // DONE: CREATE AUTHOR
-const createAuthor = (payload) => new Promise((resolve, reject) => {
+const createAuthor= (payload) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/authors.json`, {
     method: 'POST',
     headers: {
@@ -34,7 +36,7 @@ const createAuthor = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// GET SINGLE AUTHOR
+// DONE: GET SINGLE AUTHOR
 const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/authors/${firebaseKey}.json`, {
     method: 'GET',

@@ -8,7 +8,7 @@ import AuthorCard from '../components/AuthorCard';
 export default function ShowAuthors() {
   const { user } = useAuth();
   const [authors, setAuthors] = useState([]);
-
+ 
   const getAllAuthors = () => {
     getAuthors(user.uid).then(setAuthors);
   }
