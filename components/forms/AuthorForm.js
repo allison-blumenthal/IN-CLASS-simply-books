@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import FloatingLabel from 'react-bootstrap';
-import Form from 'react-bootstrap';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createAuthor, updateAuthor } from '../../api/authorData';
+import { createAuthor, getAuthors, updateAuthor } from '../../api/authorData';
 
 const initialState = {
   email: '',
@@ -13,7 +13,7 @@ const initialState = {
   last_name: '',
   image: '',
   favorite: false, 
-}
+};
 
 function AuthorForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
@@ -35,8 +35,12 @@ const handleSubmit = (e) => {
       .then(() => router.push(`/author/${obj.firebaseKey}`));
   } else {
     const payload = { ...formInput, uid: user.uid };
-    createAuthor(payload).then(() => {
-      router.push('/authors');
+    createAuthor(payload).then(({ name }) => {
+      const patchPayload = { firebaseKey: name };
+
+      updateAuthor(patchPayload).then(() => {
+        router.push('/authors');
+      })
     });
   }
 };
