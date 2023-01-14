@@ -22,10 +22,10 @@ export default function ViewBook() {
       </div>
       <div className="text-white ms-5 details">
         <h5>
-          {bookDetails.title} by {bookDetails.authorObject?.first_name} {bookDetails.authorObject?.last_name}
-          {bookDetails.authorObject?.favorite ? ' 🤍' : ''}
+          {bookDetails.title} by {bookDetails.authorObj?.first_name} {bookDetails.authorObj?.last_name}
+          {bookDetails.authorObj?.favorite ? ' 🤍' : ''}
         </h5>
-        Author Email: <a href={`mailto:${bookDetails.authorObject?.email}`}>{bookDetails.authorObject?.email}</a>
+        Author Email: <a href={`mailto:${bookDetails.authorObj?.email}`}>{bookDetails.authorObj?.email}</a>
         <p>{bookDetails.description || ''}</p>
         <hr />
         <p>

@@ -16,7 +16,7 @@ const initialState = {
   title: '',
 };
 
-function BookForm({ obj }) {
+function BookForm({ bookObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [authors, setAuthors] = useState([]);
   const router = useRouter();
@@ -25,8 +25,8 @@ function BookForm({ obj }) {
   useEffect(() => {
     getAuthors(user.uid).then(setAuthors);
 
-    if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+    if (bookObj.firebaseKey) setFormInput(bookObj);
+  }, [bookObj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,12 +38,16 @@ function BookForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (bookObj.firebaseKey) {
       updateBook(formInput)
-        .then(() => router.push(`/book/${obj.firebaseKey}`));
+        .then(() => router.push(`/book/${bookObj.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createBook(payload).then(() => {
+      createBook(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name }
+
+        updateBook(patchPayload);
+      }).then(() => {
         router.push('/');
       });
     }
@@ -51,7 +55,7 @@ function BookForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Book</h2>
+      <h2 className="text-white mt-5">{bookObj.firebaseKey ? 'Update' : 'Create'} Book</h2>
 
       {/* TITLE INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="Book Title" className="mb-3">
@@ -96,7 +100,7 @@ function BookForm({ obj }) {
           name="author_id"
           onChange={handleChange}
           className="mb-3"
-          value={obj.author_id} // FIXME: modify code to remove error
+          value={bookObj.author_id} // FIXME: modify code to remove error
           required
         >
           <option value="">Select an Author</option>
@@ -143,13 +147,13 @@ function BookForm({ obj }) {
       />
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Book</Button>
+      <Button type="submit">{bookObj.firebaseKey ? 'Update' : 'Create'} Book</Button>
     </Form>
   );
 }
 
 BookForm.propTypes = {
-  obj: PropTypes.shape({
+  bookObj: PropTypes.shape({
     description: PropTypes.string,
     image: PropTypes.string,
     price: PropTypes.string,
@@ -161,7 +165,7 @@ BookForm.propTypes = {
 };
 
 BookForm.defaultProps = {
-  obj: initialState,
+  bookObj: initialState,
 };
 
 export default BookForm;
