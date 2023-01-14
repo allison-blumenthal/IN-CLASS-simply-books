@@ -17,19 +17,17 @@ const initialState = {
 
 function AuthorForm({ authorObj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [authors, setAuthors] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
+  console.warn(formInput);
+
   useEffect(() => {
-    getAuthors(user.uid).then(setAuthors);
 
     if (authorObj.firebaseKey) setFormInput(authorObj);
   }, [authorObj, user]);
 
 const handleChange = (e) => {
-  console.warn('hello');
-
   const { name, value } = e.target;
   setFormInput((prevState) => ({
     ...prevState,

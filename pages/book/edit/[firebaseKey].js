@@ -15,5 +15,5 @@ export default function EditBook() {
   }, [firebaseKey]);
 
   // TODO: pass object to form
-  return (<BookForm obj={editItem} />);
+  return (<BookForm bookObj={editItem} />);
 }
