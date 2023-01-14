@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { deleteAuthorBooks } from '../api/mergedData';
 
-export default function AuthorCard({ authorObj }) {
+function AuthorCard({ authorObj, onUpdate }) {
 
   const deleteThisAuthor = () => {
     if (window.confirm(`Delete ${authorObj.first_name}${authorObj.last_name}?`)) {
-      deleteAuthorBooks(authorObj.firebaseKey).then(() =>ontimeupdate());
+      deleteAuthorBooks(authorObj.firebaseKey).then(() => onUpdate());
     }
 
   }
@@ -45,4 +46,7 @@ AuthorCard.propTpes = {
     image: PropTypes.string,
     favorite: PropTypes.bool,
   }).isRequired,
+    onUpdate: PropTypes.func.isRequired,
 };
+
+export default AuthorCard;

@@ -44,10 +44,10 @@ const handleChange = (e) => {
         .then(() => router.push(`/author/${authorObj.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createAuthor(payload).then((response) => {
-        const patchPayload = { firebaseKey: response };
+      createAuthor(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
 
-        updateAuthor(patchPayload.firebaseKey);
+        updateAuthor(patchPayload);
       }).then(() => {
         router.push('/authors');
       });
