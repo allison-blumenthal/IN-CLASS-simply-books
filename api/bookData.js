@@ -77,10 +77,28 @@ const updateBook = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// BOOKS ON SALE
+const booksOnSale = (uid) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/books.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const onSale = Object.values(data).filter((item) => item.sale);
+      resolve(onSale);
+    })
+    .catch(reject);
+});
+
+
 export {
   getBooks,
   createBook,
   deleteBook,
   getSingleBook,
   updateBook,
+  booksOnSale,
 };

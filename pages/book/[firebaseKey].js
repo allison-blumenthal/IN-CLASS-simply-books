@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { viewBookDetails } from '../../api/mergedData';
 
 export default function ViewBook() {
-  const [bookDetails, setBookDetails] = useState({});
+  const [bookDetails, setBookDetails] = useState([]);
   const router = useRouter();
 
   // TODO: grab firebaseKey from url
