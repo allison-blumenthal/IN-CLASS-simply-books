@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { viewBookDetails } from '../../api/mergedData';
 
 export default function ViewBook() {
-  const [bookDetails, setBookDetails] = useState({});
+  const [bookDetails, setBookDetails] = useState([]);
   const router = useRouter();
 
   // TODO: grab firebaseKey from url
@@ -16,6 +16,7 @@ export default function ViewBook() {
   }, [firebaseKey]);
 
   return (
+    <>
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
         <img src={bookDetails.image} alt={bookDetails.title} style={{ width: '300px' }} />
@@ -35,5 +36,6 @@ export default function ViewBook() {
         </p>
       </div>
     </div>
+    </>
   );
 }

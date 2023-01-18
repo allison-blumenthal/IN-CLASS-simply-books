@@ -7,7 +7,7 @@ export default function UserProfile() {
   const { user } = useAuth();
 
   return (
-    <div class="user-profile">
+    <div className="user-profile">
       <img src={user.photoURL} alt="userURL" width="100px" height="100px" />
       <h1>{user.displayName}</h1>
       <h3>{user.email}</h3>

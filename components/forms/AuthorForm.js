@@ -20,12 +20,11 @@ function AuthorForm({ authorObj }) {
   const router = useRouter();
   const { user } = useAuth();
 
-  console.warn(formInput);
-
   useEffect(() => {
-
-    if (authorObj.firebaseKey) setFormInput(authorObj);
-  }, [authorObj, user]);
+    if (authorObj.firebaseKey) {
+      setFormInput(authorObj);
+  }
+}, [authorObj, user]);
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -53,6 +52,7 @@ const handleChange = (e) => {
   }
 
   return (
+    <>
     <Form onSubmit={handleSubmit}>
       <h2 className="text-white mt-5">{authorObj.firebaseKey ? 'Update' : 'Create'} Author</h2>
 
@@ -123,6 +123,7 @@ const handleChange = (e) => {
        {/* SUBMIT BUTTON  */}
        <Button type="submit">{authorObj.firebaseKey ? 'Update' : 'Create'} Author</Button>
     </Form>
+    </>
   );
 }
 
