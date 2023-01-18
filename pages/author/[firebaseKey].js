@@ -1,7 +1,7 @@
 import  React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { viewAuthorDetails } from '../../api/mergedData';
-import { BookCard } from '../../components/BookCard';
+import  BookCard  from '../../components/BookCard';
 
 export default function ViewAuthor() {
   const [ authorDetails, setAuthorDetails ] = useState([]);

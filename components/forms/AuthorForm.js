@@ -20,12 +20,11 @@ function AuthorForm({ authorObj }) {
   const router = useRouter();
   const { user } = useAuth();
 
-  console.warn(formInput);
-
   useEffect(() => {
-
-    if (authorObj.firebaseKey) setFormInput(authorObj);
-  }, [authorObj, user]);
+    if (authorObj.firebaseKey) {
+      setFormInput(authorObj);
+  }
+}, [authorObj, user]);
 
 const handleChange = (e) => {
   const { name, value } = e.target;
