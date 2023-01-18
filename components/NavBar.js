@@ -36,6 +36,9 @@ export default function NavBar() {
             <Link passHref href="/book/sale">
               <Nav.Link>Books on Sale</Nav.Link>
             </Link>
+            <Link passHref href="/author/favorite">
+              <Nav.Link>Favorite Authors</Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

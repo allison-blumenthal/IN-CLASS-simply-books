@@ -53,6 +53,7 @@ const handleChange = (e) => {
   }
 
   return (
+    <>
     <Form onSubmit={handleSubmit}>
       <h2 className="text-white mt-5">{authorObj.firebaseKey ? 'Update' : 'Create'} Author</h2>
 
@@ -123,6 +124,7 @@ const handleChange = (e) => {
        {/* SUBMIT BUTTON  */}
        <Button type="submit">{authorObj.firebaseKey ? 'Update' : 'Create'} Author</Button>
     </Form>
+    </>
   );
 }
 

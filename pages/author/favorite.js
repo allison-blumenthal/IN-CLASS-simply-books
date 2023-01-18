@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../utils/context/authContext'; 
-import { booksOnSale } from '../../api/bookData';
-import AuthorCard from '../../components/BookCard';
+import { getFavAuthors } from '../../api/authorData';
+import AuthorCard from '../../components/AuthorCard';
 
 export default function FavoriteAuthors() {
   const { user } = useAuth();
   const [ authors, setAuthors ] = useState([]);
 
   const getFavoriteAuthors = () => {
-    booksOnSale(user.uid).then(setBooks);
+    getFavAuthors(user.uid).then(setAuthors);
   }
 
   useEffect(() => {
-    getAllBooksOnSale()
+    getFavoriteAuthors()
   }, []);
 
   return (
-    <div>{books.map((book) => (
-      <AuthorCard key={book.firebaseKey} bookObj={book} onUpdate={getAllBooksOnSale}/>
+    <div>{authors.map((author) => (
+      <AuthorCard key={author.firebaseKey} authorObj={author} onUpdate={getFavoriteAuthors}/>
     ))}</div>
   );
 }

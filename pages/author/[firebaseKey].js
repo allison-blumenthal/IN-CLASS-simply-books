@@ -1,10 +1,10 @@
-import  React, { useState, useEffect } from 'react'
+import  React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { viewAuthorDetails } from '../../api/mergedData';
 import { BookCard } from '../../components/BookCard';
 
 export default function ViewAuthor() {
-  const [authorDetails, setAuthorDetails] = useState([]);
+  const [ authorDetails, setAuthorDetails ] = useState([]);
   const router = useRouter();
 
   const { firebaseKey } = router.query;
@@ -18,6 +18,7 @@ export default function ViewAuthor() {
   }, [firebaseKey]);
 
   return (
+    <>
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
         <img src={authorDetails.image} alt={authorDetails.last_name} style={{ width: '300px' }} />
@@ -36,5 +37,6 @@ export default function ViewAuthor() {
             ))}
       </div>
     </div>
+    </>
     );
   };
